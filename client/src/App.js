@@ -1,55 +1,37 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
-} from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
+import { ApolloProvider } from '@apollo/react-hooks';
+import SearchBooks from './pages/SearchBooks';
+import SavedBooks from './pages/SavedBooks';
+import ApolloClient from 'apollo-boost';
 
-import Home from './pages/Home';
-import Detail from './pages/Detail';
-import NoMatch from './pages/NoMatch';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import Nav from './components/Nav';
-import OrderHistory from './pages/OrderHistory';
-
-const httpLink = createHttpLink({
-  uri: '/graphql',
-});
-
-const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('id_token');
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : '',
-    },
-  };
-});
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
 
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+  request: operation => {
+    const token = localStorage.getItem('id_token');
+    operation.setContext({
+      headers: {
+        authorization: token ? `Bearer ${token}` : ''
+      }
+    });
+  },
+  uri: '/graphql'
 });
+
 
 function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div>
-          <Nav />
+        <>
+          <Navbar />
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={Signup} />
-            <Route exact path="/orderHistory" component={OrderHistory} />
-            <Route exact path="/products/:id" component={Detail} />
-            <Route component={NoMatch} />
+            <Route exact path='/' component={SearchBooks} />
+            <Route exact path='/saved' component={SavedBooks} />
+            <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
           </Switch>
-        </div>
+        </>
       </Router>
     </ApolloProvider>
   );
