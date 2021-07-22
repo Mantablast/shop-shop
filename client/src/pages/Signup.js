@@ -29,30 +29,17 @@ function Signup(props) {
   };
 
   return (
-    <div className="container my-1">
-      <Link to="/login">
-        ← Go to Login
-      </Link>
+    <div className="container my-1 center">
 
       <h2>Signup</h2>
       <form onSubmit={handleFormSubmit}>
         <div className="flex-row space-between my-2">
-          <label htmlFor="firstName">First Name:</label>
+          <label htmlFor="userName">Username:</label>
           <input
-            placeholder="First"
-            name="firstName"
-            type="firstName"
-            id="firstName"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="lastName">Last Name:</label>
-          <input
-            placeholder="Last"
-            name="lastName"
-            type="lastName"
-            id="lastName"
+            placeholder="Username Here"
+            name="userName"
+            type="userName"
+            id="userName"
             onChange={handleChange}
           />
         </div>
