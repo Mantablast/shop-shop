@@ -7,7 +7,7 @@ Project by: Aimee J
 Main Github: [MissAimeeJay](https://github.com/MissAimeeJay)
 Repository Link: https://github.com/MissAimeeJay/shop-shop  
 Live Page Url:  
-[https://morning-fortress-70012.herokuapp.com/](https://morning-fortress-70012.herokuapp.com/)
+[https://infinite-waters-85303.herokuapp.com/](https://infinite-waters-85303.herokuapp.com/)
 
 ## Table of Contents
 
